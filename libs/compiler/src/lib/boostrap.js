@@ -1,8 +1,7 @@
-(function (pages, domEntryPointId) {
+function bootstrap(pages, domEntryPointId, bootstrapPage) {
   // load ejs in browser
   const ejsScript = document.createElement('script');
   ejsScript.src = 'https://cdn.jsdelivr.net/npm/ejs@3.1.6/ejs.min.js';
-  document.appendChild(ejsScript);
 
   // start working on rendering
   const domEntryPointEl = document.getElementById(domEntryPointId);
@@ -24,4 +23,22 @@
     // eslint-disable-next-line no-undef
     domEntryPointEl.innerHTML = ejs.render(ejsHtml, data);
   });
-})();
+
+  ejsScript.onload = (event) => {
+    const [ejsHtml, data] = pages[bootstrapPage];
+
+    // eslint-disable-next-line no-undef
+    domEntryPointEl.innerHTML = ejs.render(ejsHtml, data);
+  };
+
+  document.appendChild(ejsScript);
+}
+
+const pages = {};
+for (const [name, [unrenderedHtml, stringifiedData]] of Object.entries(
+  unmassagedPages
+)) {
+  pages[name] = [unrenderedHtml, JSON.parse(stringifiedData)];
+}
+
+bootstrap(pages, domEntryPointId, bootstrapPage);
