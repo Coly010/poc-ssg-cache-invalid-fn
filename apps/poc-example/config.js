@@ -1,5 +1,6 @@
 export default {
   pages: `${__dirname}/pages`,
-  index: `${__dirname}/index.html`,
+  publicIndex: `${__dirname}/index.html`,
   domEntryPointId: 'app',
+  bootstrapPage: 'home',
 };

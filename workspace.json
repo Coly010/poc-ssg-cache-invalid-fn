@@ -1,9 +1,28 @@
 {
-  
-  
   "version": 2,
-  
-  "projects": {},
+  "projects": {
+    "compiler": {
+      "root": "libs/compiler",
+      "sourceRoot": "libs/compiler/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/compiler/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/compiler"],
+          "options": {
+            "jestConfig": "libs/compiler/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   }
