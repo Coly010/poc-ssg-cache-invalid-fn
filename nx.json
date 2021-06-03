@@ -22,6 +22,9 @@
     }
   },
   "projects": {
+    "app": {
+      "tags": []
+    },
     "compiler": {
       "tags": []
     }

@@ -1,5 +1,7 @@
-import { promises as fs } from 'fs';
-import * as path from 'path';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fs = require('fs/promises');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require('path');
 
 interface Schema {
   appRoot: string;
@@ -13,17 +15,18 @@ interface CompilerConfig {
 }
 
 export default async function (schema: Schema) {
-  const compilerConfig: CompilerConfig = await import(
-    schema.appRoot + '/config.js'
-  );
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const compilerConfig: CompilerConfig = require(schema.appRoot + '/config.js');
   const pagesInFs: Record<string, [string, unknown]> = {};
 
   const pages = await fs.readdir(compilerConfig.pages);
   for (const page of pages) {
     const pageName = page.split('.').slice(0, -1).join('.');
-    const unrenderedPage: () => [string, unknown] = await import(
-      `${compilerConfig.pages}/${page}`
-    );
+    const unrenderedPage: () => [
+      string,
+      unknown
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+    ] = require(`${compilerConfig.pages}/${page}`);
     pagesInFs[pageName] = unrenderedPage();
   }
 

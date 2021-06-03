@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "compile": {
+      "implementation": "./src/index",
+      "schema": "./schema.json",
+      "description": "Compile the app"
+    }
+  }
+}

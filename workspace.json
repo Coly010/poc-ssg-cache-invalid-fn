@@ -1,11 +1,39 @@
 {
   "version": 2,
   "projects": {
+    "app": {
+      "root": "apps/poc-example",
+      "sourceRoot": "apps/poc-example",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@pscif/compiler:compile",
+          "options": {
+            "appRoot": "apps/poc-example"
+          }
+        }
+      }
+    },
     "compiler": {
       "root": "libs/compiler",
       "sourceRoot": "libs/compiler/src",
       "projectType": "library",
       "targets": {
+        "build": {
+          "executor": "@nrwl/node:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/libs/compiler",
+            "packageJson": "libs/compiler/package.json",
+            "main": "libs/compiler/src/index.ts",
+            "tsConfig": "libs/compiler/tsconfig.lib.json",
+            "assets": [
+              "libs/compiler/*.md",
+              "libs/compiler/builders.json",
+              "libs/compiler/schema.json"
+            ]
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {

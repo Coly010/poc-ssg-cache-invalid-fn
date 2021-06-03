@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@pscif/compiler": ["libs/compiler/src/index.ts"]
+      "@pscif/compiler": ["libs/compiler/src/index.ts"],
+      "yellow": ["libs/tmep2/src/index.ts"]
     },
     "types": ["node"]
   },
