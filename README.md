@@ -1,94 +1,32 @@
+## Proof of Concept Repo
 
+This repo contains code that aims to stand as a proof of concept for the following thought:
 
-# Pscif
+> Can we have an intelligent SSG (Static-Site Generation) Solution that does not require redeploys when content changes?  
+> Can we run a function when a user visits our site to determine if we need to rebuild the static files?
 
-This project was generated using [Nx](https://nx.dev).
+## Aims
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+- Implement a basic and naive CSR (client-side renderer) compiler
+- Implement a basic and naive SSG compiler
+- Create a server that will serve the static files
+- Create a function that will check if the static files need to be rebuilt
+  - if they do, send the visiting user the CSR files so they do not have to wait for a rebuild
 
-🔎 **Smart, Extensible Build Framework**
+## Thoughts
 
-## Adding capabilities to your workspace
+Right now this is using [EJS](https://ejs.co) as a renderer. This is because this is only intended to be a proof of concept.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+Despite this, I feel like this concept could be applied to a View Library such as React.
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+The goal here will be to create a slim library that will:
 
-Below are our core plugins:
+- allow the developer to specify a function to determine if the Static files need to be rebuilt
+- provide the command that needs to be run to rebuild the static files (allowing full flexibility in the underlying FE Framework / Library)
+- provide an option to give users a CSR-based version of the site (to prevent people waiting on a rebuild)
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+I know [NextJS](https://nextjs.org/) has made a start on this kind of idea with their ISSG (Incremental Static Site Generation), however, I'd like to that to the next step, or at least prove it is possible.
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+## Contributing
 
-## Generate an application
-
-Run `nx g @nrwl/react:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@pscif/mylib`.
-
-## Development server
-
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Feel free to contribute and provide additional thoughts on this!!
