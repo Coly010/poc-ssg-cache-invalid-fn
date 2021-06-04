@@ -4,7 +4,7 @@ import type { CompilerConfig } from './compiler-config';
 
 export async function csrCompiler(appRoot: string) {
   const compilerConfig: CompilerConfig = await import(
-    '../../../' + appRoot + '/config.js'
+    '../../../../' + appRoot + '/config.js'
   );
   const pagesInFs: Record<string, [string, unknown]> = {};
 
