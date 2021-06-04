@@ -1,9 +1,9 @@
 import * as prompts from 'prompts';
 import * as fs from 'fs';
 
-import compiler from './compiler';
+import { csrCompiler as compiler } from './compiler';
 
-async function startUpCompiler() {
+async function startUpCSRCompiler() {
   const { appRoot } = await prompts({
     name: 'appRoot',
     type: 'text',
@@ -20,4 +20,4 @@ async function startUpCompiler() {
   await compiler(appRoot);
 }
 
-startUpCompiler();
+startUpCSRCompiler();
