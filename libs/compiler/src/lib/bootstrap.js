@@ -6,22 +6,28 @@ function bootstrap(pages, domEntryPointId, bootstrapPage) {
   // start working on rendering
   const domEntryPointEl = document.getElementById(domEntryPointId);
 
-  const allAnchorTags = document.getElementsByTagName('a');
-  for (const anchor of allAnchorTags) {
-    anchor.onclick = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      document.dispatchEvent(
-        new CustomEvent('anchorClicked', { page: anchor.href })
-      );
-    };
+  function patchAnchorTags() {
+    const allAnchorTags = document.getElementsByTagName('a');
+    if (allAnchorTags && allAnchorTags.length > 0) {
+      for (const anchor of allAnchorTags) {
+        const anchorHref = anchor.getAttribute('href');
+        anchor.onclick = (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          document.dispatchEvent(
+            new CustomEvent('anchorClicked', { detail: anchorHref })
+          );
+        };
+      }
+    }
   }
 
-  document.on('anchorClicked', (event) => {
-    const pageToLoad = event.page;
+  document.addEventListener('anchorClicked', (event) => {
+    const pageToLoad = event.detail;
     const [ejsHtml, data] = pages[pageToLoad];
     // eslint-disable-next-line no-undef
     domEntryPointEl.innerHTML = ejs.render(ejsHtml, data);
+    patchAnchorTags();
   });
 
   ejsScript.onload = (event) => {
@@ -29,9 +35,10 @@ function bootstrap(pages, domEntryPointId, bootstrapPage) {
 
     // eslint-disable-next-line no-undef
     domEntryPointEl.innerHTML = ejs.render(ejsHtml, data);
+    patchAnchorTags();
   };
 
-  document.appendChild(ejsScript);
+  document.body.appendChild(ejsScript);
 }
 
 const pages = {};

@@ -1,3 +1,3 @@
-export default function () {
-  return [`<a href="about"></a>`, {}];
-}
+module.exports = function () {
+  return [`<a href="about">About</a>`, {}];
+};
